@@ -4,30 +4,76 @@ Introduction to Programming Coursework 1
 @author:Yujie Feng
 @date: 2023-10-19"""
 
-
 def valid_puzzle(puzzle: list) -> bool:
-    # delete this line and pass to write your code here
-    pass
-
+    if not isinstance(puzzle, list):
+        return False
+    if len(set(len(s) for s in puzzle)) == 1:
+        return True
+    else:
+        return False
 
 def similarity_grouping(data: list) -> list:
-    # delete this line and pass to write your code here
-    pass
+    if not isinstance(data, list):
+        return []
 
+    grouped_data = []
+    seen = set()
+
+    for item in data:
+        item_str = str(item)
+
+        if item_str not in seen:
+            seen.add(item_str)
+            group = [x for x in data if str(x) == item_str]
+            grouped_data.append(group)
+
+    return grouped_data
 
 def highest_count_items(data: str) -> list:
-    # delete this line and pass to write your code here
-    pass
+    if not isinstance(data, str):
+        return []
 
+    items = data.split(',')
+    counts = {}
+    max_count = 0
+
+    for item in items:
+        item = item.strip()
+        if item in counts:
+            counts[item] += 1
+        else:
+            counts[item] = 1
+
+        if counts[item] > max_count:
+            max_count = counts[item]
+
+    result = [[item, count] for item, count in counts.items() if count == max_count]
+    return result
 
 def valid_char_in_string(popList: list, charSet: list) -> bool:
-    # delete this line and pass to write your code here
-    pass
+    if not all(len(char) == 1 for char in charSet):
+        return False
 
+    for string in popList:
+        for char in string:
+            if char not in charSet:
+                return False
+
+    return True
 
 def total_price(unit: int) -> float:
-    # delete this line and pass to write your code here
-    pass
+    single_price = 1.25
+    sixpack_price = 5.00
+
+    if unit < 0:
+        return 0
+
+    total_price = (unit // 6) * sixpack_price + (unit % 6) * single_price
+
+    if total_price >= 20.00:
+        total_price *= 0.9
+
+    return round(total_price, 2)
 
 
 if __name__ == "__main__":
