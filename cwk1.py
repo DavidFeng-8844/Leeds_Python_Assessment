@@ -5,7 +5,7 @@ Introduction to Programming Coursework 1
 @date: 2023-10-19"""
 
 def valid_puzzle(puzzle: list) -> bool:
-    if not isinstance(puzzle, list):
+    if not isinstance(puzzle, list):     
         return False
     if len(set(len(s) for s in puzzle)) == 1:
         return True
