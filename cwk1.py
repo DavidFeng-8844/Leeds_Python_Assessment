@@ -1,49 +1,53 @@
 """
 Introduction to Programming Coursework 1
 
-@author:Yujie Feng
+@author: Yujie Feng
 @date: 19-10-2023
 """
 
+# Task 1.1 - Check if all strings in the puzzle have the same length
 def valid_puzzle(puzzle: list) -> bool:
-    if not isinstance(puzzle, list):     
+    if not isinstance(puzzle, list):
         return False
-    #generates a list of string lengths,
-    #create a set from the list of string lengths. 
-    #Set only allows unique values
+    # Generate a list of string lengths.
+    # Create a set from the list of string lengths.
+    # Set only allows unique values, so if the length set has a size of 1,
+    # it means all strings have the same length.
     if len(set(len(s) for s in puzzle)) == 1:
         return True
     else:
         return False
 
+# Task 1.2 - Group similar items in a list
 def similarity_grouping(data: list) -> list:
     if not isinstance(data, list):
         return []   
 
-    grouped_data = []
-    seen = set()
+    grouped_data = []  # List to store grouped data
+    seen = set()  # Set to keep track of seen items
 
     for item in data:
         item_str = str(item)
 
         if item_str not in seen:
             seen.add(item_str)
-            #A list contains the same elements as itme_str in data
+            # A list contains the same elements as item_str in data.
             group = [x for x in data if str(x) == item_str]
             grouped_data.append(group)
 
     return grouped_data
 
+# Task 1.3 - Find items with the highest count in a comma-separated string
 def highest_count_items(data: str) -> list:
     if not isinstance(data, str):
         return []
 
-    items = data.split(',')
-    counts = {}
-    max_count = 0
+    items = data.split(',')  # Split the input string into a list of items
+    counts = {}  # Dictionary to store item counts
+    max_count = 0  # Variable to keep track of the maximum count
 
     for item in items:
-        item = item.strip()
+        item = item.strip()  # Remove leading and trailing spaces
         if item in counts:
             counts[item] += 1
         else:
@@ -52,9 +56,13 @@ def highest_count_items(data: str) -> list:
         if counts[item] > max_count:
             max_count = counts[item]
 
-    result = [[item, count] for item, count in counts.items() if count == max_count]
+    # Create a list of items with the highest count
+    result = [[item, count] for item, count in counts.items() 
+              if count == max_count]
     return result
 
+# Task 1.4 - Check if all characters in a list of strings
+# belong to a given character set
 def valid_char_in_string(popList: list, charSet: list) -> bool:
     if not all(len(char) == 1 for char in charSet):
         return False
@@ -66,23 +74,26 @@ def valid_char_in_string(popList: list, charSet: list) -> bool:
 
     return True
 
+# Task 1.5 - Calculate the total price of units with a discount
 def total_price(unit: int) -> float:
-    single_price = 1.25
-    sixpack_price = 5.00
+    single_price = 1.25  # Price per single unit
+    sixpack_price = 5.00  # Price for a six-pack
 
     if unit < 0:
         return 0
 
+    # Calculate the total price, applying 
+    # the six-pack discount if applicable
     total_price = (unit // 6) * sixpack_price + (unit % 6) * single_price
 
     if total_price >= 20.00:
-        total_price *= 0.9
+        total_price *= 0.9  # Apply a 10% discount if the
+                            #total price is $20 or more
 
     return round(total_price, 2)
 
-
 if __name__ == "__main__":
-    # sample test for task 1.1
+    # Sample test for task 1.1
     puzzle1 = ['RUNAROUNDDL', 'EDCITOAHCYV', 'ZYUWSWEDZYA', 'AKOTCONVOYV',
                'LSBOSEVRUCI', 'BOBLLCGLPBD', 'LKTEENAGEDL', 'ISTREWZLCGY',
                'AURAPLEBAYG', 'RDATYTBIWRA', 'TEYEMROFINU']
@@ -100,7 +111,7 @@ if __name__ == "__main__":
     print(valid_puzzle(puzzle3))
     print(valid_puzzle(puzzle4))
 
-    # sample test for task 1.2
+    # Sample test for task 1.2
     data1 = [2, 1, 2, 1]
     data2 = [5, 4, 5, 5, 4, 3]
     data3 = [1, 2, 1, 3, 'a', 'b', "a",  'c']
@@ -108,7 +119,7 @@ if __name__ == "__main__":
     print(similarity_grouping(data2))
     print(similarity_grouping(data3))
 
-    # sample test for task 1.3
+    # Sample test for task 1.3
     data4 = ("3, 13, 7, 9, 3, 3, 5, 7, 12, 13, 11, 13, 8, 7, 5, 14, 15, 3, 9,"
              "7, 5, 9, 14, 3, 8, 2, 5, 5, 8, 14, 11, 11, 12, 8, 5, 3, 3, 10,"
              "3, 10, 7, 7, 10, 10, 2, 7, 4, 8, 1, 5")
@@ -127,6 +138,7 @@ if __name__ == "__main__":
              "tac, caa, aac, ctg, tgt, aag, ttc, ccc, tcc, ctc, cct, aga, gtt,"
              "tga, gaa, cct, ctc, tct, ggt, gcc, tct, ccc, agt, caa, gac, ccc,"
              "cgc")
+    
     print(highest_count_items(data4))
     print(highest_count_items(data5))
     print(highest_count_items(data6))
