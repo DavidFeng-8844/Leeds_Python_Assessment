@@ -9,7 +9,6 @@ Introduction to Programming Coursework 1
 def valid_puzzle(puzzle: list) -> bool:
     if not isinstance(puzzle, list):
         return False
-
     # Set only allows unique values, so if the length set has a size of 1,
     # it means all strings have the same length.
     if len(set(len(s) for s in puzzle)) == 1:
@@ -17,17 +16,16 @@ def valid_puzzle(puzzle: list) -> bool:
     else:
         return False
 
-
 # Task 1.2 - Group similar items in a list
 def similarity_grouping(data: list) -> list:
     if not isinstance(data, list):
-        return []
+        return []   
 
     grouped_data = []  # List to store grouped data
     seen = set()  # Set to keep track of seen items
 
     for item in data:
-        item_str = str(item)  # Convert the data into a string
+        item_str = str(item)#Convert the data into string
 
         if item_str not in seen:
             seen.add(item_str)
@@ -36,7 +34,6 @@ def similarity_grouping(data: list) -> list:
             grouped_data.append(group)
 
     return grouped_data
-
 
 # Task 1.3 - Find items with the highest count in a comma-separated string
 def highest_count_items(data: str) -> list:
@@ -58,10 +55,9 @@ def highest_count_items(data: str) -> list:
             max_count = counts[item]
 
     # Create a list of items with the highest count
-    result = [[item, count] for item, count in counts.items()
+    result = [[item, count] for item, count in counts.items()    
               if count == max_count]
     return result
-
 
 # Task 1.4 - Check if all characters in a list of strings
 # belong to a given character set
@@ -76,7 +72,6 @@ def valid_char_in_string(popList: list, charSet: list) -> bool:
 
     return True
 
-
 # Task 1.5 - Calculate the total price of units with a discount
 def total_price(unit: int) -> float:
     single_price = 1.25  # Price per single unit
@@ -85,17 +80,18 @@ def total_price(unit: int) -> float:
     if unit < 0:
         return 0
 
-    # Calculate the total price, applying the six-pack discount if applicable
+    # Calculate the total price, applying 
+    # the six-pack discount if applicable
     total_price = (unit // 6) * sixpack_price + (unit % 6) * single_price
 
     if total_price >= 20.00:
-        total_price *= 0.9  # Apply a 10% discount if the total price is $20 or more
+        total_price *= 0.9  # Apply a 10% discount if the
+                            #total price is $20 or more
 
     return round(total_price, 2)
 
-
 if __name__ == "__main__":
-    # sample test for task 1.1
+    # Sample test for task 1.1
     puzzle1 = ['RUNAROUNDDL', 'EDCITOAHCYV', 'ZYUWSWEDZYA', 'AKOTCONVOYV',
                'LSBOSEVRUCI', 'BOBLLCGLPBD', 'LKTEENAGEDL', 'ISTREWZLCGY',
                'AURAPLEBAYG', 'RDATYTBIWRA', 'TEYEMROFINU']
@@ -113,7 +109,7 @@ if __name__ == "__main__":
     print(valid_puzzle(puzzle3))
     print(valid_puzzle(puzzle4))
 
-    # sample test for task 1.2
+    # Sample test for task 1.2
     data1 = [2, 1, 2, 1]
     data2 = [5, 4, 5, 5, 4, 3]
     data3 = [1, 2, 1, 3, 'a', 'b', "a",  'c']
@@ -121,7 +117,7 @@ if __name__ == "__main__":
     print(similarity_grouping(data2))
     print(similarity_grouping(data3))
 
-    # sample test for task 1.3
+    # Sample test for task 1.3
     data4 = ("3, 13, 7, 9, 3, 3, 5, 7, 12, 13, 11, 13, 8, 7, 5, 14, 15, 3, 9,"
              "7, 5, 9, 14, 3, 8, 2, 5, 5, 8, 14, 11, 11, 12, 8, 5, 3, 3, 10,"
              "3, 10, 7, 7, 10, 10, 2, 7, 4, 8, 1, 5")
@@ -140,6 +136,7 @@ if __name__ == "__main__":
              "tac, caa, aac, ctg, tgt, aag, ttc, ccc, tcc, ctc, cct, aga, gtt,"
              "tga, gaa, cct, ctc, tct, ggt, gcc, tct, ccc, agt, caa, gac, ccc,"
              "cgc")
+    
     print(highest_count_items(data4))
     print(highest_count_items(data5))
     print(highest_count_items(data6))
