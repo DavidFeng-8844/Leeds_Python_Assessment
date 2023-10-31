@@ -67,6 +67,9 @@ def highest_count_items(data: str) -> list:
 # Task 1.4 - Check if all characters in a list of strings
 # belong to a given character set
 def valid_char_in_string(popList: list, charSet: list) -> bool:
+    if not isinstance(charSet, list):
+        return False
+
     if not all(len(char) == 1 for char in charSet):
         return False
 
@@ -90,8 +93,7 @@ def total_price(unit: int) -> float:
     total_price = (unit // 6) * sixpack_price + (unit % 6) * single_price
 
     if total_price >= 20.00:
-        total_price *= 0.9  # Apply a 10% discount 
-                            #if the total price is $20 or more
+        total_price *= 0.9  # Apply 10% discount if the total price is >= 20
 
     return round(total_price, 2)
 
