@@ -5,6 +5,7 @@ Introduction to Programming Coursework 1
 @date: 19-10-2023
 """
 
+
 # Task 1.1 - Check if all strings in the puzzle have the same length
 def valid_puzzle(puzzle: list) -> bool:
     if not isinstance(puzzle, list):
@@ -89,7 +90,8 @@ def total_price(unit: int) -> float:
     total_price = (unit // 6) * sixpack_price + (unit % 6) * single_price
 
     if total_price >= 20.00:
-        total_price *= 0.9  # Apply a 10% discount if the total price is $20 or more
+        total_price *= 0.9  # Apply a 10% discount 
+                            #if the total price is $20 or more
 
     return round(total_price, 2)
 
