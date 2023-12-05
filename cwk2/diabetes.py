@@ -1,6 +1,11 @@
-# Please write your name
-# @author:
+"""
+Please write your name
+@author:Yujie Feng
 
+"""
+
+# Reminder: You are only allowed to import the csv module (done it for you).
+# OTHER MODULES ARE NOT ALLOWED (NO OTHER IMPORT!!!).
 import csv
 from typing import List
 
@@ -91,14 +96,14 @@ if __name__ == "__main__":
     # You can add more tests as you want
 
     # test diabetes_data.csv
-    d1 = Diabetes("diabetes_data.csv")
+    d1 = Diabetes("cwk2/diabetes_data.csv")
     print(d1.get_dimension())
     d1.web_summary('stat01.html')
     print(d1.count_instances(Gender='Male', Obesity='Yes'))
     print()
-
+    
     # test diabetes2_data.csv
-    d2 = Diabetes("diabetes2_data.csv")
+    d2 = Diabetes("./diabetes2_data.csv")
     print(d2.get_dimension())
     d2.web_summary('stat02.html')
     print(d2.count_instances(Polyuria='Yes', Age='55'))

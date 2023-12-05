@@ -22,6 +22,24 @@ function encdec(){
 	/*
 	write your JavaScript codes below
 	*/
+  let answer = "";
+  if (operation == "enc"){
+    for (let i = 0; i < str_input.length; i++){
+      answer += mcode[str_input[i].toUpperCase()] + " ";
+    }
+  }
+  else if (operation == "dec"){
+    let str_input_split = str_input.split(" ");
+    for (let i = 0; i < str_input_split.length; i++){
+      for (let key in mcode){
+        if (mcode[key] == str_input_split[i]){
+          answer += key;
+        }
+      }
+    }
+  }
+
+
 	
 	document.getElementById("output").innerHTML = answer;
 }
@@ -30,7 +48,7 @@ function encdec(){
 </head>
 <body>
 <H1>Morse code encoder/decoder</H1>
-<h3>@author: write your name here </h3>
+<h3>@author: Yujie Feng </h3>
 <div>
 <form>
 <p> Enter a string</p>
