@@ -27,6 +27,7 @@ class Diabetes:
                 reader = csv.reader(file)
                 self.header = next(reader)
                 self.data = list(reader)
+                # print(self.data)
         except FileNotFoundError:
             raise FileNotFoundError(f"File not found: {filepath}")
 
@@ -66,11 +67,36 @@ class Diabetes:
 
         # Generate HTML table
         with open(filepath, 'w') as html_file:
-            html_file.write("<html><head></head><body><table border='1'>")
-            html_file.write("<tr><th>Attribute</th><th>Positive</th><th>Negative</th></tr>")
+            # Multiline F-strings to make it more readable (and less ugly)
+            html_content = f"""
+            <html>
+            <head></head>
+            <body>
+                <table border='1'>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Positive</th>
+                        <th>Negative</th>
+                    </tr>   
+            """
+
             for attribute, counts in attribute_counts.items():
-                html_file.write(f"<tr><td>{attribute}</td><td>{counts['Positive']}</td><td>{counts['Negative']}</td></tr>")
-            html_file.write("</table></body></html>")
+                html_content += f"""
+                    <tr>
+                        <td>{attribute}</td>
+                        <td>{counts['Positive']}</td>
+                        <td>{counts['Negative']}</td>
+                    </tr>
+                """
+
+            html_content += """
+                </table>
+            </body>
+            </html>
+            """
+
+            html_file.write(html_content)
+
 
     def count_instances(self, **criteria) -> int:
         """
