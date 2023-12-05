@@ -26,6 +26,7 @@ class Diabetes:
             with open(filepath, newline='') as file:
                 reader = csv.reader(file)
                 self.header = next(reader)
+                # print(self.header)
                 self.data = list(reader)
                 # print(self.data)
         except FileNotFoundError:
@@ -56,6 +57,23 @@ class Diabetes:
         Returns:
         - None
         """
+        # Initalize a dictionary to store positive counts
+        positive_counts = {attribute: 0 for attribute in self.header[2:-1]}
+
+        # Count positive's yes and no for each instances
+        for instance in self.data:
+            if instance[-1] == 'Positive':
+                for i, attribute in enumerate(instance[2:-1]):
+                    positive_counts[self.header[i + 2]] += 1
+
+        #Initalize a dictionary to store negative counts
+        negative_counts = {attribute: 0 for attribute in self.header[2:-1]}
+        # Count negative's yes and no for each instances
+        for instance in self.data:
+            if instance[-1] == 'Negative':
+                for i, attribute in enumerate(instance[2:-1]):
+                    negative_counts[self.header[i + 2]] += 1
+
         # Initialize a dictionary to store counts
         attribute_counts = {attribute: {'Positive': 0, 'Negative': 0} for attribute in self.header[2:-1]}
 
@@ -70,14 +88,44 @@ class Diabetes:
             # Multiline F-strings to make it more readable (and less ugly)
             html_content = f"""
             <html>
-            <head></head>
+            <head>
+            <style>
+                table, th, td {{
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                    padding: 5px;
+                }}
+                table tr:nth-child(odd) {{
+                    background-color: #d697b4;
+                }}
+                table tr:nth-child(even) {{
+                    background-color: #8cb1b6;
+                }}
+                table tr:nth-child(odd):hover {{
+                    background-color: #e83e8c;
+                }}
+                table tr:nth-child(even):hover {{
+                    background-color: #17a2b8;
+                }}
+            </style>
+            </head>
             <body>
                 <table border='1'>
                     <tr>
-                        <th>Attribute</th>
-                        <th>Positive</th>
-                        <th>Negative</th>
+                        <th rowspan = "3">Attribute</th>
+                        <th colspan = "4">Class</th>
                     </tr>   
+                    <tr>
+                        <td colspan = "2">Possitive</td>
+                        <td colspan = "2">Negative</td>
+                    </tr>
+                    <tr>
+                        <th>Yes</th>
+                        <th>No</th>
+                        <th>Yes</th>
+                        <th>No</th>
+                    </tr>
+
             """
 
             for attribute, counts in attribute_counts.items():
@@ -86,9 +134,11 @@ class Diabetes:
                         <td>{attribute}</td>
                         <td>{counts['Positive']}</td>
                         <td>{counts['Negative']}</td>
+                        <td>{counts['Positive']}</td>
+                        <td>{counts['Negative']}</td>
                     </tr>
-                """
-
+                """	
+                
             html_content += """
                 </table>
             </body>
