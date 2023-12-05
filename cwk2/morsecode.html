@@ -25,11 +25,18 @@ function encdec(){
   let answer = "";
   if (operation == "enc"){
     for (let i = 0; i < str_input.length; i++){
+      //alert invalid input
+      if (str_input[i].toUpperCase() in mcode == false){
+        alert("Invalid input");
+        return;
+      }
       answer += mcode[str_input[i].toUpperCase()] + " ";
+      console.log(answer);  
     }
   }
   else if (operation == "dec"){
     let str_input_split = str_input.split(" ");
+    console.log(str_input_split);
     for (let i = 0; i < str_input_split.length; i++){
       for (let key in mcode){
         if (mcode[key] == str_input_split[i]){
