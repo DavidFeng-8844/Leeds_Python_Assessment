@@ -23,12 +23,12 @@ class Diabetes:
         - FileNotFoundError: If the specified file is not found.
         """
         try:
-            with open(filepath, newline='') as file:
+            with open(filepath, 'r', newline='') as file:
                 reader = csv.reader(file)
                 self.header = next(reader)
-                # print(self.header)
+                print(self.header)
                 self.data = list(reader)
-                # print(self.data)
+                print(self.data)
         except FileNotFoundError:
             raise FileNotFoundError(f"File not found: {filepath}")
 
@@ -57,31 +57,24 @@ class Diabetes:
         Returns:
         - None
         """
-        # Initalize a dictionary to store positive counts
-        positive_counts = {attribute: 0 for attribute in self.header[2:-1]}
+        attributes = self.header[2:-1]  
+        attribute_counts = {}
 
-        # Count positive's yes and no for each instances
-        for instance in self.data:
-            if instance[-1] == 'Positive':
-                for i, attribute in enumerate(instance[2:-1]):
-                    positive_counts[self.header[i + 2]] += 1
+        for i in range(len(attributes)):
+            attribute_counts[attributes[i]] = {'Positive_Yes': 0, 'Positive_No': 0, 'Negative_Yes': 0, 'Negative_No': 0}
 
-        #Initalize a dictionary to store negative counts
-        negative_counts = {attribute: 0 for attribute in self.header[2:-1]}
-        # Count negative's yes and no for each instances
-        for instance in self.data:
-            if instance[-1] == 'Negative':
-                for i, attribute in enumerate(instance[2:-1]):
-                    negative_counts[self.header[i + 2]] += 1
+            for record in self.data:
+                if record[-1] == 'Positive':
+                    if record[i + 2] == 'Yes':
+                        attribute_counts[attributes[i]]['Positive_Yes'] += 1
+                    else:
+                        attribute_counts[attributes[i]]['Positive_No'] += 1
+                else:
+                    if record[i + 2] == 'Yes':
+                        attribute_counts[attributes[i]]['Negative_Yes'] += 1
+                    else:
+                        attribute_counts[attributes[i]]['Negative_No'] += 1
 
-        # Initialize a dictionary to store counts
-        attribute_counts = {attribute: {'Positive': 0, 'Negative': 0} for attribute in self.header[2:-1]}
-
-        # Count instances based on classification
-        for instance in self.data:
-            classification = instance[-1]
-            for i, attribute in enumerate(instance[2:-1]):
-                attribute_counts[self.header[i + 2]][classification] += 1
 
         # Generate HTML table
         with open(filepath, 'w') as html_file:
@@ -132,10 +125,10 @@ class Diabetes:
                 html_content += f"""
                     <tr>
                         <td>{attribute}</td>
-                        <td>{counts['Positive']}</td>
-                        <td>{counts['Negative']}</td>
-                        <td>{counts['Positive']}</td>
-                        <td>{counts['Negative']}</td>
+                        <td>{counts['Positive_Yes']}</td>
+                        <td>{counts['Positive_No']}</td>
+                        <td>{counts['Negative_Yes']}</td>
+                        <td>{counts['Negative_No']}</td>
                     </tr>
                 """	
                 
@@ -183,3 +176,10 @@ if __name__ == "__main__":
     print(d2.get_dimension())
     d2.web_summary('stat02.html')
     print(d2.count_instances(Polyuria='Yes', Age='55'))
+
+    # test diabetes3_data.csv
+    d3 = Diabetes("diabetes3_data.csv")
+    print(d3.get_dimension())
+    d3.web_summary('stat03.html')
+    print(d3.count_instances(Polyuria='Yes', Age='55'))
+    
