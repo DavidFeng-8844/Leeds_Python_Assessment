@@ -26,9 +26,9 @@ class Diabetes:
             with open(filepath, 'r', newline='') as file:
                 reader = csv.reader(file)
                 self.header = next(reader)
-                print(self.header)
+                # print(self.header)
                 self.data = list(reader)
-                print(self.data)
+                # print(self.data)
         except FileNotFoundError:
             raise FileNotFoundError(f"File not found: {filepath}")
 
@@ -58,7 +58,7 @@ class Diabetes:
         - None
         """
         attributes = self.header[2:-1]  
-        attribute_counts = {}
+        attribute_counts = {}  #Initialize dictionary to store counts for each attributes
 
         for i in range(len(attributes)):
             attribute_counts[attributes[i]] = {'Positive_Yes': 0, 'Positive_No': 0, 'Negative_Yes': 0, 'Negative_No': 0}
@@ -169,7 +169,6 @@ if __name__ == "__main__":
     print(d1.get_dimension())
     d1.web_summary('stat01.html')
     print(d1.count_instances(Gender='Male', Obesity='Yes'))
-    print()
     
     # test diabetes2_data.csv
     d2 = Diabetes("diabetes2_data.csv")
