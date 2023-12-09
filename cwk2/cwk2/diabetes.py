@@ -13,8 +13,8 @@ class Diabetes:
     def __init__(self, filepath: str) -> None:
         """
         Reads in a diabetes-related csv file, specified by filepath,
-        and assigns data in header to an instance variable, and the remaining
-        data to another instance variable.
+        and assigns data in header to an instance variable, and 
+        the remaining data to another instance variable.
 
         Parameters:
         - filepath (str): The path to the diabetes-related csv file.
@@ -46,9 +46,10 @@ class Diabetes:
 
     def web_summary(self, filepath: str) -> None:
         """
-        Generates an HTML file, specified by the filepath parameter, containing
-        an HTML table summarizing the total count of Yes and No values for
-        attributes other than Age and Gender, based on the classification
+        Generates an HTML file, specified by the filepath 
+        parameter, containing an HTML table summarizing the
+        total count of Yes and No values for attributes other 
+        than Age and Gender, based on the classification
         (Positive or Negative) for the data.
 
         Parameters:
@@ -58,10 +59,14 @@ class Diabetes:
         - None
         """
         attributes = self.header[2:-1]  
-        attribute_counts = {}  #Initialize dictionary to store counts for each attributes
+        attribute_counts = {}  #Initialize dictionary to store counts 
 
         for i in range(len(attributes)):
-            attribute_counts[attributes[i]] = {'Positive_Yes': 0, 'Positive_No': 0, 'Negative_Yes': 0, 'Negative_No': 0}
+            attribute_counts[attributes[i]] = {'Positive_Yes': 0, 
+                                               'Positive_No': 0, 
+                                               'Negative_Yes': 0, 
+                                               'Negative_No': 0
+                                               }
 
             for record in self.data:
                 if record[-1] == 'Positive':
@@ -153,7 +158,8 @@ class Diabetes:
         """
         count = 0
         for instance in self.data:
-            match = all(instance[self.header.index(key)] == str(value) for key, value in criteria.items())
+            match = all(instance[self.header.index(key)] == 
+                    str(value) for key, value in criteria.items())
             if match:
                 count += 1
         return count
