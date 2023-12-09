@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>Morse Code</title>
+<script>
+
+function encdec(){
+	let str_input = document.getElementById("input").value;
+	let operation = document.getElementById("operation").value;
+	
+	const mcode = {
+      'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+      'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+      'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+      'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+      'Y': '-.--', 'Z': '--..', ' ': ' ', '0': '-----',
+      '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
+      '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+      '&': '.-...', "'": '.----.', '@': '.--.-.', ')': '-.--.-', '(': '-.--.',
+      ':': '---...', ',': '--..--', '=': '-...-', '!': '-.-.--', '.': '.-.-.-',
+      '-': '-....-', '+': '.-.-.', '"': '.-..-.', '?': '..--..', '/': '-..-.'
+    }
+	/*
+	write your JavaScript codes below
+	*/
+  let answer = "";
+  if (operation == "enc"){
+    for (let i = 0; i < str_input.length; i++){
+      //alert invalid input
+      if (str_input[i].toUpperCase() in mcode == false){
+        alert("Invalid input");
+        return;
+      }
+      // Check if the current character is not a space before appending a space
+      if (str_input[i] !== ' ') {
+          answer += mcode[str_input[i].toUpperCase()] + " ";
+      } else {
+          // If it's a space, just append a space without Morse code conversion
+          answer += " ";
+      }
+      console.log(answer);
+    }
+  }
+  else if (operation == "dec"){
+    for(let i = 0; i < str_input.length; i++) {
+      console.log(str_input[i])
+    }
+    let str_input_split = str_input.split(" ");
+    console.log(str_input_split);
+    for (let i = 0; i < str_input_split.length; i++){
+      if (str_input_split[i] == ""){
+        answer += " ";
+        continue;
+      }
+      for (let key in mcode){
+        if (mcode[key] == str_input_split[i]){
+          answer += key;
+        }
+      }
+      // Add space between words
+      //answer += " ";
+    }
+  }
+
+
+	
+	document.getElementById("output").innerHTML = answer;
+}
+
+</script>
+</head>
+<body>
+<H1>Morse code encoder/decoder</H1>
+<h3>@author: Yujie Feng </h3>
+<div>
+<form>
+<p> Enter a string</p>
+<p> <textarea id="input" rows='5' cols='50'></textarea> </p>
+<p>
+<div id="optionloc" style="position:absolute; top:190px; left:240px;">
+<select id="operation">
+<option value="enc">Encode</option>
+<option value="dec">Decode</option>
+</select>
+</div>
+<div id="buttonloc" style="position:absolute; top:190px; left:320px;">
+<button type="button" id="submit" onclick=encdec()>Submit</button>
+</div>
+</p>
+
+<div>
+<p>Encoded/decoded Morse code: </p>
+<textarea id="output" rows='5' cols='50' readonly></textarea>
+</div>
+</form>
+</div>
+</body>
+</html>
