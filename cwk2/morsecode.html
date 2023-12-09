@@ -30,19 +30,34 @@ function encdec(){
         alert("Invalid input");
         return;
       }
-      answer += mcode[str_input[i].toUpperCase()] + " ";
-      console.log(answer);  
+      // Check if the current character is not a space before appending a space
+      if (str_input[i] !== ' ') {
+          answer += mcode[str_input[i].toUpperCase()] + " ";
+      } else {
+          // If it's a space, just append a space without Morse code conversion
+          answer += " ";
+      }
+      console.log(answer);
     }
   }
   else if (operation == "dec"){
+    for(let i = 0; i < str_input.length; i++) {
+      console.log(str_input[i])
+    }
     let str_input_split = str_input.split(" ");
     console.log(str_input_split);
     for (let i = 0; i < str_input_split.length; i++){
+      if (str_input_split[i] == ""){
+        answer += " ";
+        continue;
+      }
       for (let key in mcode){
         if (mcode[key] == str_input_split[i]){
           answer += key;
         }
       }
+      // Add space between words
+      //answer += " ";
     }
   }
 
