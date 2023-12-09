@@ -1,7 +1,6 @@
 """
 Please write your name
-@author:Yujie Feng
-
+@author: Yujie Feng
 """
 
 # Reminder: You are only allowed to import the csv module (done it for you).
@@ -9,11 +8,12 @@ Please write your name
 import csv
 from typing import List
 
+
 class Diabetes:
     def __init__(self, filepath: str) -> None:
         """
         Reads in a diabetes-related csv file, specified by filepath,
-        and assigns data in header to an instance variable, and 
+        and assigns data in header to an instance variable, and
         the remaining data to another instance variable.
 
         Parameters:
@@ -46,9 +46,9 @@ class Diabetes:
 
     def web_summary(self, filepath: str) -> None:
         """
-        Generates an HTML file, specified by the filepath 
+        Generates an HTML file, specified by the filepath
         parameter, containing an HTML table summarizing the
-        total count of Yes and No values for attributes other 
+        total count of Yes and No values for attributes other
         than Age and Gender, based on the classification
         (Positive or Negative) for the data.
 
@@ -58,13 +58,13 @@ class Diabetes:
         Returns:
         - None
         """
-        attributes = self.header[2:-1]  
-        attribute_counts = {}  #Initialize dictionary to store counts 
+        attributes = self.header[2:-1]
+        attribute_counts = {}  # Initialize dictionary to store counts
 
         for i in range(len(attributes)):
-            attribute_counts[attributes[i]] = {'Positive_Yes': 0, 
-                                               'Positive_No': 0, 
-                                               'Negative_Yes': 0, 
+            attribute_counts[attributes[i]] = {'Positive_Yes': 0,
+                                               'Positive_No': 0,
+                                               'Negative_Yes': 0,
                                                'Negative_No': 0
                                                }
 
@@ -80,9 +80,8 @@ class Diabetes:
                     else:
                         attribute_counts[attributes[i]]['Negative_No'] += 1
 
-
         # Generate HTML table
-        with open(filepath, 'w') as html_file:
+        with open(filepath, 'w', newline='') as html_file:
             # Multiline F-strings to make it more readable (and less ugly)
             html_content = f"""
             <html>
@@ -110,12 +109,12 @@ class Diabetes:
             <body>
                 <table border='1'>
                     <tr>
-                        <th rowspan = "3">Attribute</th>
-                        <th colspan = "4">Class</th>
-                    </tr>   
+                        <th rowspan="3">Attribute</th>
+                        <th colspan="4">Class</th>
+                    </tr>
                     <tr>
-                        <td colspan = "2">Possitive</td>
-                        <td colspan = "2">Negative</td>
+                        <td colspan="2">Possitive</td>
+                        <td colspan="2">Negative</td>
                     </tr>
                     <tr>
                         <th>Yes</th>
@@ -123,7 +122,6 @@ class Diabetes:
                         <th>Yes</th>
                         <th>No</th>
                     </tr>
-
             """
 
             for attribute, counts in attribute_counts.items():
@@ -135,8 +133,8 @@ class Diabetes:
                         <td>{counts['Negative_Yes']}</td>
                         <td>{counts['Negative_No']}</td>
                     </tr>
-                """	
-                
+                """
+
             html_content += """
                 </table>
             </body>
@@ -144,7 +142,6 @@ class Diabetes:
             """
 
             html_file.write(html_content)
-
 
     def count_instances(self, **criteria) -> int:
         """
@@ -158,11 +155,12 @@ class Diabetes:
         """
         count = 0
         for instance in self.data:
-            match = all(instance[self.header.index(key)] == 
-                    str(value) for key, value in criteria.items())
+            match = all(instance[self.header.index(key)] ==
+                        str(value) for key, value in criteria.items())
             if match:
                 count += 1
         return count
+
 
 if __name__ == "__main__":
     # You can comment the following when you are testing your code
@@ -173,16 +171,9 @@ if __name__ == "__main__":
     print(d1.get_dimension())
     d1.web_summary('stat01.html')
     print(d1.count_instances(Gender='Male', Obesity='Yes'))
-    
+
     # test diabetes2_data.csv
     d2 = Diabetes("diabetes2_data.csv")
     print(d2.get_dimension())
     d2.web_summary('stat02.html')
     print(d2.count_instances(Polyuria='Yes', Age='55'))
-
-    # test diabetes3_data.csv
-    d3 = Diabetes("diabetes3_data.csv")
-    print(d3.get_dimension())
-    d3.web_summary('stat03.html')
-    print(d3.count_instances(Polyuria='Yes', Age='55'))
-    
