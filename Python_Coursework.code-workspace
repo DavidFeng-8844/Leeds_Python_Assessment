@@ -2,6 +2,12 @@
     "folders": [
         {
             "path": "./cwk2"
+        },
+        {
+            "path": "./cwk1"
         }
-    ]
+    ],
+    "settings": {
+        "liveServer.settings.port": 5501
+    }
 }
