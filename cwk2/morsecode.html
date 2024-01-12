@@ -6,7 +6,7 @@
 function encdec(){
 	let str_input = document.getElementById("input").value;
 	let operation = document.getElementById("operation").value;
-	
+
 	const mcode = {
       'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
       'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
@@ -30,12 +30,12 @@ function encdec(){
         alert("Invalid input");
         return;
       }
-      //First check if the char is the last of the input 
+      //First check if the char is the last of the input
       if (i == str_input.length - 1){
         answer += mcode[str_input[i].toUpperCase()];
         break;
       }
-      // Check if the current character is not a space before appending a space
+      // Check if the current character is not a sp1ace before appending a space
       if (str_input[i] !== ' ') {
           answer += mcode[str_input[i].toUpperCase()] + " ";
       } else{
@@ -67,7 +67,7 @@ function encdec(){
   }
 
 
-	
+
 	document.getElementById("output").innerHTML = answer;
 }
 
