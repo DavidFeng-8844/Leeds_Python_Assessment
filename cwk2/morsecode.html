@@ -30,10 +30,15 @@ function encdec(){
         alert("Invalid input");
         return;
       }
+      //First check if the char is the last of the input 
+      if (i == str_input.length - 1){
+        answer += mcode[str_input[i].toUpperCase()];
+        break;
+      }
       // Check if the current character is not a space before appending a space
       if (str_input[i] !== ' ') {
           answer += mcode[str_input[i].toUpperCase()] + " ";
-      } else {
+      } else{
           // If it's a space, just append a space without Morse code conversion
           answer += " ";
       }
